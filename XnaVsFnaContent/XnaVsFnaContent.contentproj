@@ -35,6 +35,96 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="600px-Muse_uv_01-01-1024x1024.jpg">
+      <Name>600px-Muse_uv_01-01-1024x1024</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="600px-Uvrefmap_blackwhite.jpg">
+      <Name>600px-Uvrefmap_blackwhite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_GenerateMipmaps>True</ProcessorParameters_GenerateMipmaps>
+    </Compile>
+    <Compile Include="600px-Uvrefmap_checkeredmap.jpg">
+      <Name>600px-Uvrefmap_checkeredmap</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="622px-Uvrefmap_blender.jpg">
+      <Name>622px-Uvrefmap_blender</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_checker_util-mark.jpg">
+      <Name>Uvrefmap_checker_util-mark</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_circles.jpg">
+      <Name>Uvrefmap_circles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_circlesgreen_noise.jpg">
+      <Name>Uvrefmap_circlesgreen_noise</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_circlessquares.jpg">
+      <Name>Uvrefmap_circlessquares</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_circles_letters.jpg">
+      <Name>Uvrefmap_circles_letters</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_circles_noise.jpg">
+      <Name>Uvrefmap_circles_noise</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_grid_large.jpg">
+      <Name>Uvrefmap_grid_large</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_grid_small.jpg">
+      <Name>Uvrefmap_grid_small</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_HarlequiN_grid.jpg">
+      <Name>Uvrefmap_HarlequiN_grid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_nvidia_greengrid.jpg">
+      <Name>Uvrefmap_nvidia_greengrid</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uvrefmap_util-mark1.jpg">
+      <Name>Uvrefmap_util-mark1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Uv_mapping_grid_by_cymae.jpg">
+      <Name>Uv_mapping_grid_by_cymae</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Uvrefmap_checker_green.png">
+      <Name>Uvrefmap_checker_green</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

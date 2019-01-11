@@ -51,7 +51,7 @@ namespace WindowsGame1
       // Create a new SpriteBatch, which can be used to draw textures.
       spriteBatch = new SpriteBatch(GraphicsDevice);
 
-      sprite = Content.Load<Texture2D>("RedBurstBullet");
+      sprite = Content.Load<Texture2D>("600px-Uvrefmap_blackwhite");
     }
 
     /// <summary>
@@ -89,14 +89,25 @@ namespace WindowsGame1
 
       // TODO: Add your drawing code here
 
+      Vector2 viewportDimensions = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
       spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
       {
+        float scale = .125f;
+        Vector2 spriteDimensions = new Vector2(sprite.Width, sprite.Height)*scale;
         Vector2 spriteOrigin = new Vector2(sprite.Width, sprite.Height) / 2;
-        for (int i = 0; i < 5000; ++i)
+        const int numSprites = 1000;
+        for (int i = 0; i < numSprites; ++i)
         {
-          Vector2 position = new Vector2(random.Next(1280), random.Next(720));
-          float depth = (float)random.NextDouble();
-          spriteBatch.Draw(sprite, position, null, Color.White, 0, spriteOrigin, 1, SpriteEffects.None, depth);
+          //Vector2 position = new Vector2(random.Next(1280), random.Next(720));
+          float amount = (float)i/(numSprites-1);
+          Vector2 position = spriteOrigin*scale 
+            + new Vector2(
+              MathHelper.Lerp(0, viewportDimensions.X-spriteDimensions.X, amount), 
+              MathHelper.Lerp(0, viewportDimensions.Y-spriteDimensions.Y, amount));
+          //float depth = (float)random.NextDouble();
+          float depth = MathHelper.Lerp(0, 1, amount);
+          spriteBatch.Draw(sprite, position, null, Color.White, 0, spriteOrigin, scale, SpriteEffects.None, depth);
         }
       }
       spriteBatch.End();

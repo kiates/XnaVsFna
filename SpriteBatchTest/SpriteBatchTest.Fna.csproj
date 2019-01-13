@@ -125,7 +125,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SpriteBatchTest\SpriteBatchTestContent\SpriteBatchTestContent.contentproj">
+    <ProjectReference Include="SpriteBatchTestContent\SpriteBatchTestContent.contentproj">
       <Project>{A395171B-0C1D-492B-BBEE-EDB3FA6FB122}</Project>
       <Name>SpriteBatchTestContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

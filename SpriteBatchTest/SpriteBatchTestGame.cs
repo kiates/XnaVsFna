@@ -35,6 +35,56 @@ public static class Extensions
   }
 }
 
+class SimpleRunningAverage
+{
+  int _size;
+  double[] _values = null;
+  int _valuesIndex = 0;
+  int _valueCount = 0;
+  double _sum = 0;
+
+  public SimpleRunningAverage(int size)
+  {
+    System.Diagnostics.Debug.Assert(size > 0);
+    _size = Math.Max(size, 1);
+    _values = new double[_size];
+  }
+
+  public double Add(double newValue)
+  {
+    // calculate new value to add to sum by subtracting the
+    // value that is replaced from the new value;
+    double temp = newValue - _values[_valuesIndex];
+    _values[_valuesIndex] = newValue;
+    _sum += temp;
+
+    _valuesIndex++;
+    _valuesIndex %= _size;
+
+    if (_valueCount < _size)
+      _valueCount++;
+
+    return _sum / _valueCount;
+  }
+}
+
+class Stat
+{
+  public SimpleRunningAverage Average2 = new SimpleRunningAverage(5*60);
+  public double Average;
+  public double Max = double.MinValue;
+  public double Min = double.MaxValue;
+  public double Median;
+
+  public void Update(double value)
+  {
+    Max = Math.Max(Max, value);
+    Min = Math.Min(Min, value);
+    Median = (Min + Max) / 2;
+    Average = Average2.Add(value);
+  }
+}
+
 class SpriteBatchTestGame : Game
 {
   private const int SPRITECOUNT = 2048;
@@ -43,7 +93,7 @@ class SpriteBatchTestGame : Game
   private const int TEXTURESIZE = 128;
   private static readonly Color TEXTURECOLOR = Color.White;
 
-  private SpriteSortMode mode = SpriteSortMode.BackToFront;
+  private SpriteSortMode mode = SpriteSortMode.Deferred;
 
   private Stopwatch timer;
   private Random random;
@@ -58,7 +108,7 @@ class SpriteBatchTestGame : Game
   {
     new GraphicsDeviceManager(this);
     timer = new Stopwatch();
-    random = new Random();
+    random = new Random(0);
     positions = new Vector2[SPRITECOUNT];
     depths = new float[SPRITECOUNT];
     colors = new Color[SPRITECOUNT];
@@ -76,18 +126,23 @@ class SpriteBatchTestGame : Game
     }
     batch.End();
     timer.Stop();
-    //Console.WriteLine("Batch took {0} ticks ({1} ms with {2}.", timer.ElapsedTicks, timer.ElapsedMilliseconds, mode);
-    stats.TryGetValue(mode, out List<double> stat2);
-    if (stat2 == null)
+    if (elapsed > .5f)
     {
-      stat2 = new List<double>(100);
-      stats[mode] = stat2;
+      //Console.WriteLine("Batch took {0} ticks ({1} ms with {2}.", timer.ElapsedTicks, timer.ElapsedMilliseconds, mode);
+      stats.TryGetValue(mode, out Stat stat2);
+      if (stat2 == null)
+      {
+        stat2 = new Stat();
+        stats[mode] = stat2;
+      }
+
+      stat2.Update(timer.ElapsedTicks);
     }
-    stat2.Add(timer.ElapsedTicks);
+
     timer.Reset();
   }
 
-  private readonly Dictionary<SpriteSortMode, List<double>> stats = new Dictionary<SpriteSortMode, List<double>>();
+  private readonly Dictionary<SpriteSortMode, Stat> stats = new Dictionary<SpriteSortMode, Stat>();
 
   private KeyboardState currentKeyboardState;
   private KeyboardState previousKeyboardState;
@@ -97,21 +152,31 @@ class SpriteBatchTestGame : Game
     return currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyUp(key);
   }
 
+  private double elapsed;
+
   protected override void Update(GameTime gameTime)
   {
+    elapsed += gameTime.ElapsedGameTime.TotalSeconds;
+
+    if (elapsed > 1.5)
+    {
+      if (mode == SpriteSortMode.FrontToBack)
+      {
+        WriteStats();
+        Exit();
+      }
+      else
+      {
+        mode += 1;
+        elapsed = 0;
+      }
+    }
+
     currentKeyboardState = Keyboard.GetState();
 
     if (IsKeyPressed(Keys.D))
     {
-      foreach (KeyValuePair<SpriteSortMode, List<double>> series in stats)
-      {
-        double averageTicks = series.Value.Average();
-
-        Console.WriteLine("{0}: {1} ticks on average", series.Key, averageTicks);
-        //Console.WriteLine("{0}: {1} ticks on average", series.Key, series.Value.StdDev());
-      }
-
-      Console.WriteLine();
+      WriteStats();
     }
 
     if (IsKeyPressed(Keys.D1))
@@ -147,6 +212,22 @@ class SpriteBatchTestGame : Game
     }
 
     previousKeyboardState = currentKeyboardState;
+  }
+
+  private void WriteStats()
+  {
+    if (stats.Count > 1)
+    {
+      Console.WriteLine();
+    }
+
+    foreach (KeyValuePair<SpriteSortMode, Stat> series in stats)
+    {
+      Stat seriesValue = series.Value;
+      Console.WriteLine("{0}: Average={1}, Min={2}, Max={3}, Median={4} (ticks)", series.Key, seriesValue.Average,
+        seriesValue.Min, seriesValue.Max, seriesValue.Median);
+      //Console.WriteLine("{0}: {1} ticks on average", series.Key, series.Value.StdDev());
+    }
   }
 
   protected override void LoadContent()

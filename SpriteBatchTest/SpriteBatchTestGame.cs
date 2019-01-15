@@ -227,6 +227,7 @@ class SpriteBatchTestGame : Game
 					WriteStats();
 					++currentImplementationIndex;
 					currentSortOrder = 0;
+					stats.Clear();
 
 					if (currentImplementationIndex < TestModes.Count)
 					{

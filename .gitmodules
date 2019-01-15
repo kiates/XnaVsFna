@@ -1,6 +1,6 @@
 [submodule "FNA"]
 	path = FNA
-	url = ssh://kiates-home.no-ip.org/mnt/raid/git/FNA.git
+	url = https://github.com/kiates/FNA.git
 [submodule "FNALibs"]
 	path = FNALibs
-	url = ssh://kiates-home.no-ip.org/mnt/raid/git/FNALibs.git
+	url = https://github.com/kiates/FNALibs.git

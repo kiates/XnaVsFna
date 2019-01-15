@@ -158,7 +158,8 @@ class SpriteBatchTestGame : Game
 	    new TestMode(SpriteBatchImpl.OriginalInlinedCompare, sortModes),
 	    new TestMode(SpriteBatchImpl.SortUsingIndex, sortModes),
 	    new TestMode(SpriteBatchImpl.SortUsingInfoIndex, sortModes),
-	    new TestMode(SpriteBatchImpl.SpriteInfo, sortModes)
+	    new TestMode(SpriteBatchImpl.SpriteInfo, sortModes),
+	    new TestMode(SpriteBatchImpl.SpriteInfoNonInlined, sortModes)
     };
 #else
 		TestModes = new List<TestMode> {new TestMode(SpriteBatchImpl.Original, sortModes)};

@@ -85,11 +85,7 @@ class Stat
 #if !FNA
 public enum SpriteBatchImpl
 {
-	Original,
-	OriginalInlinedCompare,
-	SortUsingIndex,
-	SortUsingInfoIndex,
-	SpriteInfo
+	Xna
 }
 #endif
 
@@ -163,7 +159,7 @@ class SpriteBatchTestGame : Game
 	    new TestMode(SpriteBatchImpl.Flibit, sortModes)
     };
 #else
-		TestModes = new List<TestMode> {new TestMode(SpriteBatchImpl.Original, sortModes)};
+		TestModes = new List<TestMode> {new TestMode(SpriteBatchImpl.Xna, sortModes)};
 #endif
 
 		mode = TestModes[0].SortModes[0];

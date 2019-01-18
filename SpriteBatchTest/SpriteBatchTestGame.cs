@@ -81,8 +81,13 @@ class Stat
 		Average = Average2.Add(value);
 	}
 }
-
-#if !FNA
+#if FNA
+public enum SpriteBatchImpl
+{
+	Fna
+}
+#elif FNA_MULTIPLE_IMPL
+#else
 public enum SpriteBatchImpl
 {
 	Xna
@@ -100,6 +105,8 @@ class SpriteBatchTestGame : Game
 	private SpriteSortMode mode;
 
 #if FNA
+	private SpriteBatchImpl? impl { get; set; }
+#elif FNA_MULTIPLE_IMPL
   private SpriteBatchImpl? impl { get { return SpriteBatch.impl; } set { SpriteBatch.impl = value; } }
 #else
 	private SpriteBatchImpl? impl { get; set; }
@@ -148,6 +155,8 @@ class SpriteBatchTestGame : Game
 		};
 
 #if FNA
+		TestModes = new List<TestMode> { new TestMode(SpriteBatchImpl.Fna, sortModes) };
+#elif FNA_MULTIPLE_IMPL
 		TestModes = new List<TestMode>
     {
 	    new TestMode(SpriteBatchImpl.Original, sortModes),

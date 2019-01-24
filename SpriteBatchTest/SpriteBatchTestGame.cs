@@ -96,6 +96,9 @@ public enum SpriteBatchImpl
 
 class SpriteBatchTestGame : Game
 {
+	const float warmupTime = 2f;
+	const float benchmarkTime = 10f;
+
 	private const int SPRITECOUNT = 2048;
 	private const int TEXTURECOUNT = 2;
 
@@ -188,7 +191,7 @@ class SpriteBatchTestGame : Game
 
 		batch.End();
 		timer.Stop();
-		if (elapsed > .5f)
+		if (elapsed > warmupTime)
 		{
 			stats.TryGetValue(mode, out Stat stat2);
 			if (stat2 == null)
@@ -222,7 +225,7 @@ class SpriteBatchTestGame : Game
 	{
 		elapsed += gameTime.ElapsedGameTime.TotalSeconds;
 
-		if (elapsed > 1.5f)
+		if (elapsed > benchmarkTime + warmupTime)
 		{
 			if (currentImplementationIndex >= TestModes.Count)
 			{

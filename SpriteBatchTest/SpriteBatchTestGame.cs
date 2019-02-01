@@ -360,6 +360,16 @@ class SpriteBatchTestGame : Game
 
 	public static void Main(string[] args)
 	{
+		// Maybe have a better args check than this, but you get it...
+		if (args.Length > 0 && args[0] == "-d3d11")
+		{
+			if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+			{
+				Environment.SetEnvironmentVariable("FNA_OPENGL_FORCE_ES3", "1");
+				Environment.SetEnvironmentVariable("SDL_OPENGL_ES_DRIVER", "1");
+			}
+		}
+
 		using (SpriteBatchTestGame game = new SpriteBatchTestGame())
 		{
 			game.Run();

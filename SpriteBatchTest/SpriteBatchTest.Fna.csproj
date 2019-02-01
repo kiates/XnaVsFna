@@ -74,6 +74,12 @@
     <Compile Include="SpriteBatchTestGame.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\FNALibs\x86\libEGL.dll">
+      <Link>libEGL.dll</Link>
+    </Content>
+    <Content Include="..\FNALibs\x86\libGLESv2.dll">
+      <Link>libGLESv2.dll</Link>
+    </Content>
     <Content Include="..\FNALibs\x86\libjpeg-9.dll">
       <Link>libjpeg-9.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
